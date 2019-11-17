@@ -1,0 +1,19 @@
+skinhairyou.com "v=spf1 mx a ip4:204.48.25.72 include:zoho.com ~all"
+skinhairyou._domainkey.skinhairyou.com	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCM0npKM+Rn7v88gFdyhKjr2Ba7RTEqTiU9tbISOLS3wtuVNnilh1GG2hgLe++sYDnQpqOk//rxcWF9AY0ykK36qI4KtakOE/S3vJIvoXO2XFe8ONuivmoJtuYJYfuhwkAK7Gz7b10b+Ua+SrJd1gNizj6OWQ5n9euLQs1ebUYh5QIDAQAB"	
+
+zb15313241.skinhairyou.com CNAME 	zmverify.zoho.com
+
+
+
+Sr No	 	   Record Id	 	   Name	 	   Priority	 	   Value	 	   Status	 
+
+
+1	 	     92795763	 	skinhairyou.com	 	10	 	mx.zoho.com	 	Active	 
+
+
+2	 	     92795770	 	skinhairyou.com	 	20	 	mx2.zoho.com	 	Active	 
+
+
+3	 	     92795778	 	skinhairyou.com	 	50	 	mx3.zoho.com	 	Active	 
+
+
