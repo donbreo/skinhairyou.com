@@ -42,3 +42,20 @@
       transform: rotateY(0rem);
     }
   }
+
+  .navbar--link{
+    list-style: none;
+    width: 100%;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+.navbar--link > .navbar--link-item{
+  display: inline-block;
+  
+    height: 100%;
+}
