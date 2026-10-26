@@ -9,7 +9,7 @@ const themes = {
 };
 const themeStorageKey = 'skinHairYouDemoTheme';
 const savedTheme = localStorage.getItem(themeStorageKey);
-const activeTheme = Object.hasOwn(themes, savedTheme) ? savedTheme : 'green';
+const activeTheme = Object.hasOwn(themes, savedTheme) ? savedTheme : 'purple';
 
 function applyTheme(themeName) {
   const theme = themes[themeName];

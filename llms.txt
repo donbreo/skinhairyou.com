@@ -1,0 +1,30 @@
+# Skin Hair & You
+
+> Skin Hair & You is a skin, hair and cosmetic care clinic established in 2012, with locations in Borivali East, Mumbai and Koregaon Park, Pune, India.
+
+This file is a supplementary guide to the public website, not a medical advice service. Treatment suitability and results vary; a consultation is needed for personalised advice. Clinic hours, prices and clinician credentials are not published here; contact the clinic for current details.
+
+## Clinic information
+
+- [About the clinic](https://www.skinhairyou.com/about.html): Background, care approach and locations.
+- [Contact and directions](https://www.skinhairyou.com/contact.html): Published addresses and consultation enquiries. Call +91 98197 97935 or +91 98201 38350. The website form opens a WhatsApp message for the visitor to review and send; it does not send or store enquiries.
+- [Home](https://www.skinhairyou.com/): Clinic overview and common questions.
+
+## Services
+
+- [Skin Disorders](https://www.skinhairyou.com/skin_disorders.html): Explore personalised skin disorder care at Skin Hair & You in Mumbai and Pune. Arrange a consultation to discuss your skin concerns and treatment options.
+- [Hair Disorders](https://www.skinhairyou.com/hair_disorder.html): Understand hair loss and scalp concerns with Skin Hair & You in Mumbai and Pune. Explore assessment and personalised hair restoration options.
+- [Hair Transplant (FUE)](https://www.skinhairyou.com/hair_transplant.html): Learn about FUE hair transplants at Skin Hair & You in Mumbai and Pune, including donor assessment, hairline planning, suitability and aftercare.
+- [Nail Disorders](https://www.skinhairyou.com/nail_disorder.html): Explore nail disorder assessment and care at Skin Hair & You in Mumbai and Pune. Contact the clinic to discuss changes in your nails and treatment options.
+- [Facial Cleansing](https://www.skinhairyou.com/face_cleansing.html): Explore facial cleansing and hydration at Skin Hair & You in Mumbai and Pune. Discuss a skincare routine and treatment suited to your individual skin.
+- [STD / HIV Care](https://www.skinhairyou.com/std.html): Sensitive, respectful STD / HIV care for associated skin concerns at Skin Hair & You in Mumbai and Pune. Contact the clinic to discuss screening and support.
+
+## Patient education and results
+
+- [Clinic journal](https://www.skinhairyou.com/blog.html): General information on facial serums, skin health and types of hair loss, adapted from the original clinic journal.
+- [Patient results](https://www.skinhairyou.com/results.html): Original hair transplant and natural hair rejuvenation gallery. Individual results vary; no outcome is guaranteed.
+
+## Discovery
+
+- [All services](https://www.skinhairyou.com/services.html)
+- [Sitemap](https://www.skinhairyou.com/sitemap.xml)

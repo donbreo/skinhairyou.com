@@ -6,7 +6,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check assets/site.js"
+    "check": "node --check server.js && node --check assets/site.js && node scripts/seo.js --check",
+    "seo:generate": "node scripts/seo.js",
+    "test": "node --test tests/*.test.js"
   },
   "engines": {
     "node": ">=20"

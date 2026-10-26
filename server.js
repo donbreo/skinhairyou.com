@@ -1,6 +1,8 @@
 'use strict';
 
 const path = require('node:path');
+const fs = require('node:fs');
+const { createHash } = require('node:crypto');
 const express = require('express');
 const helmet = require('helmet');
 
@@ -23,6 +25,18 @@ const pages = new Set([
   'skin_disorders.html',
   'std.html',
 ]);
+const canonicalOrigin = 'https://www.skinhairyou.com';
+const discoveryFiles = new Map([
+  ['/robots.txt', 'robots.txt'],
+  ['/sitemap.xml', 'sitemap.xml'],
+  ['/llms.txt', 'llms.txt'],
+]);
+const structuredDataHashes = [...pages].map((pageName) => {
+  const html = fs.readFileSync(path.join(siteRoot, pageName), 'utf8');
+  const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  if (!match) throw new Error(`Missing structured data in ${pageName}. Run npm run seo:generate.`);
+  return `'sha256-${createHash('sha256').update(match[1]).digest('base64')}'`;
+});
 
 if (!Number.isInteger(port) || port < 0 || port > 65535) {
   throw new Error('PORT must be an integer between 0 and 65535.');
@@ -35,7 +49,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
+      scriptSrc: ["'self'", ...structuredDataHashes],
       styleSrc: ["'self'"],
       imgSrc: ["'self'"],
       fontSrc: ["'self'"],
@@ -71,8 +85,33 @@ function sendPage(pageName, res, next) {
   });
 }
 
+app.use((req, res, next) => {
+  const hostname = req.hostname.toLowerCase();
+  if (hostname === 'skinhairyou.com' || (hostname === 'www.skinhairyou.com' && !req.secure)) {
+    return res.redirect(308, `${canonicalOrigin}${req.originalUrl}`);
+  }
+  if (hostname !== 'www.skinhairyou.com') {
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  }
+  next();
+});
+
+app.get([...discoveryFiles.keys()], (req, res, next) => {
+  res.setHeader('Cache-Control', 'public, max-age=300');
+  if (req.path === '/robots.txt' && req.hostname.toLowerCase() !== 'www.skinhairyou.com') {
+    return res.type('text/plain').send('User-agent: *\nDisallow: /\n');
+  }
+  res.sendFile(path.join(siteRoot, discoveryFiles.get(req.path)), (error) => {
+    if (error) next(error);
+  });
+});
+
+app.get('/index.html', (req, res) => {
+  const queryIndex = req.originalUrl.indexOf('?');
+  res.redirect(308, `/${queryIndex === -1 ? '' : req.originalUrl.slice(queryIndex)}`);
+});
 app.get('/', (req, res, next) => sendPage('index.html', res, next));
-app.get([...pages].map((pageName) => `/${pageName}`), (req, res, next) => {
+app.get([...pages].filter((pageName) => pageName !== 'index.html').map((pageName) => `/${pageName}`), (req, res, next) => {
   sendPage(req.path.slice(1), res, next);
 });
 
