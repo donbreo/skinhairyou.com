@@ -58,13 +58,12 @@ const contactForm = document.querySelector('#contact-form');
 if (contactForm) {
   const errors = document.querySelector('#form-errors');
   const status = document.querySelector('#form-status');
-  const fields = ['name', 'phone', 'email', 'clinic', 'message'];
+  const fields = ['name', 'email', 'clinic', 'message'];
   const messages = {
     name: 'Please enter your name (at least 2 characters).',
-    phone: 'Please enter a valid phone number with 7 to 15 digits.',
     email: 'Please enter a valid email address, or leave it blank.',
     clinic: 'Please select your preferred clinic.',
-    message: 'Please tell us a little more (at least 10 characters).',
+    message: 'Please keep your message under 2000 characters.',
   };
   let hasSubmitted = false;
   contactForm.noValidate = true;
@@ -75,11 +74,7 @@ if (contactForm) {
     let valid = field.validity.valid;
     const value = field.value.trim();
     if (fieldName === 'name') valid = value.length >= 2 && value.length <= 100;
-    if (fieldName === 'phone') {
-      const digits = value.replace(/\D/g, '');
-      valid = /^[+\d()\s.-]+$/.test(value) && digits.length >= 7 && digits.length <= 15;
-    }
-    if (fieldName === 'message') valid = value.length >= 10 && value.length <= 2000;
+    if (fieldName === 'message') valid = value.length <= 2000;
     field.setAttribute('aria-invalid', String(!valid));
     document.querySelector(`#${fieldName}-error`).textContent = valid ? '' : messages[fieldName];
     return valid;
@@ -126,21 +121,33 @@ if (contactForm) {
       return;
     }
     status.replaceChildren();
+    const values = Object.fromEntries(
+      ['name', 'email', 'clinic', 'interest', 'message']
+        .map((fieldName) => [fieldName, contactForm.elements.namedItem(fieldName).value.trim()])
+    );
+    const lines = [
+      'Hello Skin Hair & You, I would like to enquire about a consultation.',
+      '',
+      `Name: ${values.name}`,
+      values.email ? `Email: ${values.email}` : '',
+      values.clinic ? `Preferred clinic: ${values.clinic}` : '',
+      values.interest ? `Interested in: ${values.interest}` : '',
+      '',
+      values.message ? `How can we help? ${values.message}` : '',
+    ].filter((line) => line !== '');
+    const whatsappUrl = `https://wa.me/919819797935?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
     const heading = document.createElement('h3');
-    heading.textContent = 'Your enquiry preview';
+    heading.textContent = 'Continue your enquiry in WhatsApp';
     const explanation = document.createElement('p');
-    explanation.textContent = 'Nothing has been sent or saved. Please call +91 98197 97935 or +91 98201 38350 to arrange your consultation.';
-    const details = document.createElement('dl');
-    for (const [fieldName, label] of [['name', 'Name'], ['phone', 'Phone'], ['email', 'Email'], ['clinic', 'Clinic'], ['interest', 'Interest'], ['message', 'Message']]) {
-      const value = contactForm.elements.namedItem(fieldName).value.trim();
-      if (!value) continue;
-      const term = document.createElement('dt');
-      const definition = document.createElement('dd');
-      term.textContent = label;
-      definition.textContent = value;
-      details.append(term, definition);
-    }
-    status.append(heading, explanation, details);
+    explanation.textContent = 'Your message is ready in WhatsApp. Review it there and tap Send when you’re ready.';
+    const fallback = document.createElement('a');
+    fallback.href = whatsappUrl;
+    fallback.target = '_blank';
+    fallback.rel = 'noopener noreferrer';
+    fallback.textContent = 'Open WhatsApp';
+    status.append(heading, explanation, fallback);
     status.hidden = false;
     status.focus();
   });

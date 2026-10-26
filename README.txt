@@ -18,10 +18,12 @@ outcomes or misleading treatment claims. Have a clinician review treatment
 information and confirm the current contact details before publication.
 
 CONTACT FORM
-The vanilla JavaScript form only validates and previews an enquiry.
-It does not send, save, email or book anything. Visitors are explicitly
-directed to call the clinic. No PHP or third-party form service is used.
-Without JavaScript, submission is disabled and the phone details remain.
+The vanilla JavaScript form requires a name, then opens a prefilled
+WhatsApp chat to +91 98197 97935. All other enquiry details are optional.
+Visitors review and send the message in WhatsApp; this website does not
+send or store the form data. No PHP or third-party form service is used.
+Without JavaScript, visitors can open a WhatsApp chat directly using the
+link on the contact page.
 
 The mobile navigation and results viewer are progressively enhanced.
 All content and normal page links remain available without JavaScript.

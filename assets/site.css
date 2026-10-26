@@ -286,6 +286,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #68745b;outline-offset
 .error-summary a{text-decoration:underline}
 .form-status{margin-top:20px;background:#e8ecdf;padding:20px;font-size:12px;border-left:3px solid #68745b;overflow-wrap:anywhere}
 .form-status h3{font-size:25px;margin-bottom:10px}
+.form-status a{display:inline-block;margin-top:12px;text-decoration:underline}
 .form-status dl{display:grid;grid-template-columns:auto 1fr;gap:5px 15px;font-size:11px;margin-bottom:0}
 .form-status dt{font-weight:600}
 .form-status dd{margin:0;white-space:pre-wrap}
