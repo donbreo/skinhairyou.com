@@ -1,10 +1,34 @@
 SKIN HAIR & YOU - STATIC WEBSITE
 
-Open index.html, or serve this folder with any static web server.
-There are no frameworks, dependencies, PHP handlers or build steps.
+Run `npm ci`, then set the values from sample.env in your environment and
+run `npm start`. On Linux/macOS, use `set -a && . ./sample.env && set +a
+&& npm start`. Node.js 20 or newer is required. Node does not load sample.env
+automatically.
 All 12 HTML pages contain their own complete content and navigation.
 Styling is in assets/site.css; optional interactions are in assets/site.js.
 Images and fonts are local to assets, so the folder can be deployed on its own.
+
+SERVER AND HTTPS DEPLOYMENT
+server.js serves only the allowlisted HTML pages and files in assets/.
+It sets security headers, a restrictive Content Security Policy, disables
+unneeded HTTP methods and limits request timeouts and header counts.
+For a Cloudflare Tunnel running on this same server, use the sample.env
+values: HOST=127.0.0.1, PORT=12207 and TRUST_PROXY=loopback. In the tunnel's
+public-hostname or ingress configuration, route demo.skinhairyou.com to
+http://127.0.0.1:12207. Example local-managed ingress:
+
+  ingress:
+    - hostname: demo.skinhairyou.com
+      service: http://127.0.0.1:12207
+    - service: http_status:404
+
+Cloudflare serves HTTPS at the edge; cloudflared makes an outbound tunnel
+connection and forwards requests to the local HTTP origin. Do not expose
+port 12207 publicly. When cloudflared runs in a container or on a different
+host, use an origin address reachable from it and set TRUST_PROXY only to
+the exact trusted proxy address/network. Ensure the proxy overwrites
+X-Forwarded-* headers. DNS/public-hostname routing and TLS are configured
+in Cloudflare; no origin certificate is needed for this loopback HTTP setup.
 
 THEME DEMO
 Add ?theme-demo=1 to any page URL to reveal the temporary palette selector.
