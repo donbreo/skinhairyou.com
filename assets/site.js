@@ -2,6 +2,54 @@
 
 document.body.classList.add('js-enabled');
 
+const themes = {
+  green: { label: 'Green', logo: 'assets/images/brand-mark.svg', color: '#344638' },
+  purple: { label: 'Purple', logo: 'assets/images/brand-mark-purple.svg', color: '#51406e' },
+  red: { label: 'Red', logo: 'assets/images/brand-mark-red.svg', color: '#81373b' },
+};
+const themeStorageKey = 'skinHairYouDemoTheme';
+const savedTheme = localStorage.getItem(themeStorageKey);
+const activeTheme = Object.hasOwn(themes, savedTheme) ? savedTheme : 'green';
+
+function applyTheme(themeName) {
+  const theme = themes[themeName];
+  document.documentElement.dataset.theme = themeName;
+  document.querySelectorAll('.brand-mark').forEach((logo) => { logo.src = theme.logo; });
+  document.querySelector('link[rel="icon"]').href = theme.logo;
+  document.querySelector('meta[name="theme-color"]').content = theme.color;
+}
+
+applyTheme(activeTheme);
+
+if (new URLSearchParams(window.location.search).has('theme-demo')) {
+  const panel = document.createElement('div');
+  panel.className = 'theme-demo';
+  panel.setAttribute('role', 'group');
+  panel.setAttribute('aria-label', 'Demo color palettes');
+  const label = document.createElement('span');
+  label.className = 'theme-demo-label';
+  label.textContent = 'Palette';
+  const choices = document.createElement('div');
+  choices.className = 'theme-demo-choices';
+  for (const [themeName, theme] of Object.entries(themes)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `theme-demo-choice theme-demo-choice-${themeName}`;
+    button.textContent = theme.label;
+    button.setAttribute('aria-pressed', String(themeName === activeTheme));
+    button.addEventListener('click', () => {
+      localStorage.setItem(themeStorageKey, themeName);
+      choices.querySelectorAll('button').forEach((choice) => {
+        choice.setAttribute('aria-pressed', String(choice === button));
+      });
+      applyTheme(themeName);
+    });
+    choices.append(button);
+  }
+  panel.append(label, choices);
+  document.body.append(panel);
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 const serviceToggle = document.querySelector('.services-toggle');

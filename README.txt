@@ -6,6 +6,13 @@ All 12 HTML pages contain their own complete content and navigation.
 Styling is in assets/site.css; optional interactions are in assets/site.js.
 Images and fonts are local to assets, so the folder can be deployed on its own.
 
+THEME DEMO
+Add ?theme-demo=1 to any page URL to reveal the temporary palette selector.
+Green, purple and red palettes update the page accents, logo SVG and browser
+theme color; the selection is remembered in this browser. Remove the selector
+by removing the theme-demo block near the top of assets/site.js and the
+.theme-demo styles in assets/site.css when the demo is complete.
+
 Migrated pages:
 Home, About us, Our services, Hair Disorders, Hair Transplant (FUE),
 Nail Disorders, STD / HIV Care, Skin Disorders, Facial Cleansing,
