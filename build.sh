@@ -19,9 +19,8 @@ fi
 echo "Installing production dependencies..."
 npm ci --omit=dev
 
-echo "Removing existing PM2 deployment..."
-"${PM2_CMD[@]}" delete all >/dev/null 2>&1 || true
-"${PM2_CMD[@]}" kill >/dev/null 2>&1 || true
+echo "Removing existing PM2 process for ${APP_NAME} (if any)..."
+"${PM2_CMD[@]}" delete "$APP_NAME" >/dev/null 2>&1 || true
 
 echo "Starting app with PM2..."
 "${PM2_CMD[@]}" start server.js --name "$APP_NAME" --update-env
